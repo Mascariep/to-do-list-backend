@@ -3,18 +3,24 @@ import cors from 'cors'
 import { db } from './database/knex'
 import { TTaskDB, TTaskWithUsers, TUserDB, TUserTaskDB } from './types'
 
+//criação do aplicativo
 const app = express()
 
+//Middleware - serviços que ele vai executar em ordem de criação
 app.use(cors())
 app.use(express.json())
 
+//configuração da porta onde vai rodar o servidor
 app.listen(3003, () => {
     console.log(`Servidor rodando na porta ${3003}`)
 })
 
+//Endpoint PING pata teste
 app.get("/ping", async (req: Request, res: Response) => {
     try {
+        
         res.status(200).send({ message: "Pong!" })
+
     } catch (error) {
         console.log(error)
 
