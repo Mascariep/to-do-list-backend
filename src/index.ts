@@ -13,14 +13,13 @@ app.use(express.json())
 //configuração da porta onde vai rodar o servidor
 app.listen(3003, () => {
     console.log(`Servidor rodando na porta ${3003}`)
-})
+});
 
-//Endpoint PING pata teste
+//Endpoint GET PING pata teste
 app.get("/ping", async (req: Request, res: Response) => {
     try {
-        
-        res.status(200).send({ message: "Pong!" })
-
+		const result = await db("users")
+        res.status(200).send({ message: "Pong!"})//, result })
     } catch (error) {
         console.log(error)
 
@@ -34,8 +33,9 @@ app.get("/ping", async (req: Request, res: Response) => {
             res.send("Erro inesperado")
         }
     }
-})
+});
 
+//Endpoint GET USERS - criação de usuários
 app.get("/users", async (req: Request, res: Response) => {
     try {
         const searchTerm = req.query.q as string | undefined
@@ -60,8 +60,9 @@ app.get("/users", async (req: Request, res: Response) => {
             res.send("Erro inesperado")
         }
     }
-})
+});
 
+//Endpoint POST USERS - adicionar usuários
 app.post("/users", async (req: Request, res: Response) => {
     try {
         const { id, name, email, password } = req.body
@@ -136,8 +137,9 @@ app.post("/users", async (req: Request, res: Response) => {
             res.send("Erro inesperado")
         }
     }
-})
+});
 
+//Endpoint DELETE USERS - deletar usuários
 app.delete("/users/:id", async (req: Request, res: Response) => {
     try {
         const idToDelete = req.params.id
@@ -172,7 +174,7 @@ app.delete("/users/:id", async (req: Request, res: Response) => {
             res.send("Erro inesperado")
         }
     }
-})
+});
 
 app.get("/tasks", async (req: Request, res: Response) => {
     try {
@@ -201,7 +203,7 @@ app.get("/tasks", async (req: Request, res: Response) => {
             res.send("Erro inesperado")
         }
     }
-})
+});
 
 app.post("/tasks", async (req: Request, res: Response) => {
     try {
