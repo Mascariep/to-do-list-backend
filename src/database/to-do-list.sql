@@ -1,4 +1,8 @@
--- Active: 1674502658222@@127.0.0.1@3306
+-- Active: 1674653434556@@127.0.0.1@3306
+
+-----------------------------------------------
+--CRIAÇÃO DAS TABELAS
+
 CREATE TABLE users (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
     name TEXT NOT NULL,
@@ -21,6 +25,9 @@ CREATE TABLE users_tasks (
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON UPDATE CASCADE
 );
 
+---------------------------------------------------
+--POPULANDO AS TABELAS
+
 INSERT INTO users (id, name, email, password)
 VALUES
 	("f001", "Fulano", "fulano@email.com", "fulano123"),
@@ -40,9 +47,22 @@ VALUES
 	("f001", "t003"),
 	("f002", "t003");
 
+----------------------------------------------------
+--VISUALIZAR AS TABELAS CRIADAS
+
 SELECT * FROM users;
 SELECT * FROM tasks;
 SELECT * FROM users_tasks;
+
+----------------------------------------------------
+--DELETANDO AS TABELAS
+
+DROP TABLE users;
+DROP TABLE tasks;
+DROP TABLE users_tasks;
+
+----------------------------------------------------
+--RELAÇÕES DE TABELAS
 
 SELECT * FROM users_tasks
 INNER JOIN users
